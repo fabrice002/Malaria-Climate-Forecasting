@@ -1,0 +1,103 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# Not published with this repository
+# ──────────────────────────────────────────────────────────────────────────────
+# Internal working documents and the thesis LaTeX sources are kept private.
+# The thesis itself is published as docs/memoirthesis.pdf.
+0_DOCUMENTATION/
+7_THESIS_TEXT/
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Generated output — rebuilt by the notebooks, never committed
+# ──────────────────────────────────────────────────────────────────────────────
+# 3_REGENERATE_FIGURES/generate_all_figures.ipynb writes here (Run All, ~11 min).
+# The originals in 2_FIGURES/thesis_figures/ ARE committed, for comparison.
+2_FIGURES/regenerated/*
+!2_FIGURES/regenerated/.gitkeep
+
+# CatBoost training logs
+catboost_info/
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Application runtime state
+# ──────────────────────────────────────────────────────────────────────────────
+# SQLite database created on first run of 6_APP/serve_all.py
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Python
+# ──────────────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+.conda/
+
+# Tooling caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Jupyter
+# ──────────────────────────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+profile_default/
+ipython_config.py
+
+# ──────────────────────────────────────────────────────────────────────────────
+# LaTeX build artifacts
+# ──────────────────────────────────────────────────────────────────────────────
+*.aux
+*.log
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.out
+*.toc
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Secrets and local configuration
+# ──────────────────────────────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Editors and operating systems
+# ──────────────────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini

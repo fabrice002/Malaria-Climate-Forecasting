@@ -1,0 +1,30 @@
+{
+  "window_local": "2026-04-20 20:05 to 2026-04-28 01:45",
+  "days_spanned": 9,
+  "complete_days": 1,
+  "missing_days": [
+    "2026-04-25",
+    "2026-04-26"
+  ],
+  "readings": 1567,
+  "sampling_interval_s": 180.01796050000002,
+  "matched_hours": 82,
+  "bias_temperature_C": 7.267629209571006,
+  "bias_humidity_points": -30.590634449088377,
+  "bias_pressure_hPa": 4.265379574206692,
+  "bias_dewpoint_C": -0.04372637268719853,
+  "rh_expected_from_offset": 56.96465399618738,
+  "rh_measured": 56.76302408749699,
+  "diurnal_amplitude_iot_C": 7.292499987284344,
+  "diurnal_amplitude_era_C": 7.366666666666667,
+  "cases_baseline": 5482,
+  "cases_raw_sensor": 3406,
+  "cases_corrected_sensor": 5413,
+  "error_raw_pct": -37.86939073330901,
+  "error_corrected_pct": -1.2586647209047792,
+  "rain_sensitivity_pct": 3.159061518566414,
+  "importance_geography_pct": 84.87668544317185,
+  "importance_precipitation_pct": 2.3900248078420043,
+  "sensor_T_sd_above_local_mean": 7.844011388389557,
+  "validator_passed_raw_stream": true
+}

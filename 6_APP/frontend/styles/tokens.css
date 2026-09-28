@@ -1,0 +1,69 @@
+/**
+ * Design tokens — the single source of visual truth.
+ *
+ * Palette and type carried over from the original dashboard mock so the
+ * refactor is visually faithful; only the structure changed.
+ */
+
+:root {
+  /* ── Colour ─────────────────────────────────────────────────────────────── */
+  --ink: #1a2238;
+  --paper: #f6f4ee;
+  --surface: #ffffff;
+  --line: #d8d3c4;
+  --muted: #6b6657;
+
+  --risk-low: #3a7d5d;
+  --risk-elevated: #d99a2b;
+  --risk-high: #c0392b;
+
+  --accent: #c0392b;
+  --accent-ink: #ffffff;
+  --positive: #c0392b;   /* SHAP: pushes prediction up */
+  --negative: #2980b9;   /* SHAP: pushes prediction down */
+
+  --ok: #3a7d5d;
+  --warn: #d99a2b;
+  --down: #c0392b;
+
+  /* ── Type ───────────────────────────────────────────────────────────────── */
+  --font-sans: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'Cascadia Code', monospace;
+
+  --fs-xs: 10px;
+  --fs-sm: 11px;
+  --fs-base: 12px;
+  --fs-md: 13px;
+  --fs-lg: 16px;
+  --fs-xl: 22px;
+  --fs-2xl: 26px;
+
+  /* ── Space & shape ──────────────────────────────────────────────────────── */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 28px;
+
+  --radius: 3px;
+  --radius-lg: 6px;
+
+  --shadow-sm: 0 1px 2px rgba(26, 34, 56, 0.08);
+  --shadow-md: 0 4px 16px rgba(26, 34, 56, 0.14);
+
+  --panel-width: 380px;
+  --header-height: 56px;
+
+  --transition: 140ms ease;
+}
+
+/* Respect the OS reduced-motion preference. */
+@media (prefers-reduced-motion: reduce) {
+  :root { --transition: 0ms; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

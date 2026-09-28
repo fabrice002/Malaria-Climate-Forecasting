@@ -1,0 +1,39 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    environment:
+      POSTGRES_USER: malaria
+      POSTGRES_PASSWORD: malaria
+      POSTGRES_DB: malaria
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U malaria"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: .
+    environment:
+      MEWS_DATABASE_URL: postgresql+psycopg://malaria:malaria@db:5432/malaria
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+
+  # Nginx reverse proxy (TLS termination, static dashboard) — production.
+  # nginx:
+  #   image: nginx:alpine
+  #   ports: ["80:80", "443:443"]
+  #   volumes:
+  #     - ./nginx.conf:/etc/nginx/nginx.conf:ro
+  #   depends_on: [api]
+
+volumes:
+  pgdata:

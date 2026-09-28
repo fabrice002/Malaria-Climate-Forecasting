@@ -1,0 +1,7 @@
+{
+  "readings": [
+    {"district":"Mbalmayo","year":2026,"month":4,"temperature_c":24.1,"humidity_pct":78,"pressure_hpa":915,"precipitation_mm":150},
+    {"district":"Mbalmayo","year":2026,"month":5,"temperature_c":23.8,"humidity_pct":80,"pressure_hpa":914,"precipitation_mm":190},
+    {"district":"Mbalmayo","year":2026,"month":6,"temperature_c":23.5,"humidity_pct":82,"pressure_hpa":913,"precipitation_mm":210}
+  ]
+}

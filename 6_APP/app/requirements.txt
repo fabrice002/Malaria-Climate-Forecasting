@@ -1,0 +1,20 @@
+fastapi>=0.110
+uvicorn[standard]>=0.29
+pydantic>=2.6
+pydantic-settings>=2.2
+sqlalchemy>=2.0
+joblib>=1.3
+numpy>=1.26
+pandas>=2.1
+scikit-learn>=1.4
+xgboost>=2.0
+shap>=0.44
+# Production extras:
+psycopg[binary]>=3.1     # PostgreSQL driver
+geoalchemy2>=0.14        # PostGIS geometry columns
+python-jose[cryptography]>=3.3  # JWT auth
+passlib[bcrypt]>=1.7     # password hashing
+
+# Ordonnancement autonome du pipeline MLOps (optionnel : sans lui,
+# l'application demarre avec l'ordonnancement desactive)
+apscheduler>=3.10

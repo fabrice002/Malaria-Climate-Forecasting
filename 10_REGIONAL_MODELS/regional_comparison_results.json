@@ -1,0 +1,39 @@
+{
+  "n_folds": 3,
+  "n_comparable_rows": 3546,
+  "r2_global": 0.685221441760794,
+  "r2_regional": 0.6761972413818189,
+  "r2_cluster": 0.6885267268649103,
+  "mae_global": 2.355713527635201,
+  "mae_regional": 2.2842940073766695,
+  "mae_cluster": 2.2844334394603796,
+  "f1_global": 0.7023376623376624,
+  "f1_regional": 0.6891512085441259,
+  "f1_cluster": 0.7025246981339188,
+  "regions_where_regional_wins": 5,
+  "regions_where_groups_win": 6,
+  "n_regions": 10,
+  "correlation_volume_gain": 0.124485677525706,
+  "difficult_regions": [
+    "Est",
+    "Sud"
+  ],
+  "groups": {
+    "0": [
+      "Extreme Nord",
+      "Nord"
+    ],
+    "1": [
+      "Littoral",
+      "Nord Ouest",
+      "Ouest",
+      "Sud",
+      "Sud Ouest"
+    ],
+    "2": [
+      "Adamaoua",
+      "Centre",
+      "Est"
+    ]
+  }
+}

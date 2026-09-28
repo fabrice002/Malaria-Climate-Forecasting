@@ -1,0 +1,14 @@
+{
+  "districts_evaluated": 194,
+  "district_years": 388,
+  "regions": 10,
+  "spearman_pooled": 0.8586784330121288,
+  "kendall_pooled": 0.6686469359732002,
+  "top25_recall": 0.6792452830188679,
+  "within_region_spearman_median": 0.7082746994867772,
+  "between_region_spearman": 0.915151515151515,
+  "ground_truth_year_stability": 0.9705673643757905,
+  "median_scale_ratio": 1.7968755835107544,
+  "loro_internal_f1": 0.372,
+  "loro_internal_r2": -0.461
+}

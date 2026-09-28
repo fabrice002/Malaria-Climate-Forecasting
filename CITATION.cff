@@ -1,0 +1,40 @@
+cff-version: 1.2.0
+title: >-
+  Malaria Prediction Based on Environmental Data Collected Through
+  Internet of Things (IoT) Sensors
+message: >-
+  If you use this software or its results, please cite the thesis below.
+type: software
+authors:
+  - family-names: Ouandji Njanang
+    given-names: Herve Fabrice
+    affiliation: >-
+      National Advanced School of Engineering of Yaounde (ENSPY),
+      University of Yaounde I
+license: MIT
+repository-code: ""
+keywords:
+  - malaria
+  - epidemiological forecasting
+  - climate
+  - ERA5
+  - machine learning
+  - MLOps
+  - internet of things
+  - Cameroon
+references:
+  - type: thesis
+    title: >-
+      Malaria Prediction Based on Environmental Data Collected Through
+      Internet of Things (IoT) Sensors
+    authors:
+      - family-names: Ouandji Njanang
+        given-names: Herve Fabrice
+    thesis-type: >-
+      Master's thesis, Master of Engineering Science, Specialisation
+      Data Science
+    institution:
+      name: >-
+        Department of Computer Engineering, National Advanced School of
+        Engineering of Yaounde (ENSPY), University of Yaounde I
+    year: 2026

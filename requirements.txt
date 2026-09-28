@@ -1,0 +1,42 @@
+# Verified environment for this package (Python 3.12).
+# These are the exact versions the figure regeneration was tested against:
+# generate_all_figures.ipynb ran 19/19 figures, 0 errors, in ~11 minutes.
+#
+#   pip install -r requirements.txt
+#
+# The API in 6_APP/ has its own, lighter list: 6_APP/app/requirements.txt
+
+# ── core ─────────────────────────────────────────────────────────────────────
+numpy==1.26.4
+pandas==2.3.3
+scipy==1.13.1
+
+# ── models ───────────────────────────────────────────────────────────────────
+scikit-learn==1.8.0
+xgboost==3.3.0
+lightgbm==4.6.0
+catboost==1.2.10
+optuna==4.8.0
+
+# ── explainability ───────────────────────────────────────────────────────────
+shap==0.46.0
+# NOTE: shap <= 0.47 with xgboost >= 3.0 breaks shap.TreeExplainer
+# (ValueError: could not convert string to float: '[2.12E0]').
+# generate_all_figures.ipynb handles this automatically via shap_values_xgb(),
+# which falls back to xgboost's own pred_contribs. Upgrading shap past 0.48 also
+# fixes it and the fallback then simply never triggers.
+
+# ── plotting ─────────────────────────────────────────────────────────────────
+matplotlib==3.10.9
+seaborn==0.13.2
+
+# ── data plumbing ────────────────────────────────────────────────────────────
+rapidfuzz==3.12.2       # district <-> climate-location fuzzy matching
+joblib==1.5.3
+xlrd==2.0.2             # reads the .xls PNLP ground truth (2023-2025)
+openpyxl==3.1.5
+
+# ── notebook ─────────────────────────────────────────────────────────────────
+jupyterlab
+nbformat==5.10.4
+ipykernel

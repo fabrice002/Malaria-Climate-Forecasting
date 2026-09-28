@@ -1,0 +1,42 @@
+{
+  "main_source": "B — PNLP xls row 7 (facility + community), 2023-2025",
+  "n_months": 36,
+  "seed_months": 12,
+  "step_months": 6,
+  "n_iterations": 4,
+  "reconciliation_factor_A_B": 1.3066767096810867,
+  "gap_months": 10,
+  "psi_indicator_break": 3.988042190077808,
+  "ks_break": 0.4444444444444444,
+  "mae_per_strategy": {
+    "Fine-tuning": 218.3,
+    "Recalibration": 271.5,
+    "Hybrid retrain": 288.3,
+    "Local retrain": 326.6,
+    "Frozen": 434.1
+  },
+  "f1_per_strategy": {
+    "Fine-tuning": 0.0,
+    "Recalibration": 0.167,
+    "Hybrid retrain": 0.0,
+    "Local retrain": 0.0,
+    "Frozen": 0.0
+  },
+  "abs_bias_per_strategy": {
+    "Fine-tuning": 7.7,
+    "Recalibration": 9.7,
+    "Hybrid retrain": 11.1,
+    "Local retrain": 10.0,
+    "Frozen": 22.6
+  },
+  "best_strategy": "Fine-tuning",
+  "gain_vs_frozen_%": -49.72458119982578,
+  "mae_seed_24": {
+    "Recalibration": 153.8,
+    "Local retrain": 169.6,
+    "Hybrid retrain": 170.6,
+    "Fine-tuning": 187.1,
+    "Frozen": 532.7
+  },
+  "finetune_sensitivity_factor": 118.7266931559916
+}

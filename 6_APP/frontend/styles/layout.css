@@ -1,0 +1,159 @@
+/** Page skeleton: header, map column, detail panel. */
+
+.app {
+  display: grid;
+  grid-template-columns: 1fr var(--panel-width);
+  grid-template-rows: auto 1fr;
+  height: 100vh;
+  height: 100dvh;
+}
+
+/* ── Header ─────────────────────────────────────────────────────────────────*/
+.app__header {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-4);
+  padding: var(--sp-3) var(--sp-5);
+  background: var(--ink);
+  color: var(--paper);
+  border-bottom: 3px solid var(--accent);
+}
+
+.app__title {
+  font-size: 18px;
+}
+
+.app__subtitle {
+  font-size: var(--fs-base);
+  color: #a9b0c4;
+}
+
+.app__badge {
+  margin-left: auto;
+  font-size: var(--fs-base);
+  font-weight: 600;
+  background: var(--accent);
+  color: var(--accent-ink);
+  padding: var(--sp-1) var(--sp-3);
+  border-radius: var(--radius);
+}
+
+/* ── Map column ─────────────────────────────────────────────────────────────*/
+.app__main {
+  grid-column: 1;
+  grid-row: 2;
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-width: 0;
+  min-height: 0;
+}
+
+.app__toolbar {
+  padding: var(--sp-3) var(--sp-4);
+  border-bottom: 1px solid var(--line);
+  background: var(--paper);
+}
+
+/* Wrapper so the legend overlays the map only, never the district strip. */
+.app__map-wrap {
+  position: relative;
+  min-height: 0;
+}
+
+.app__map {
+  position: absolute;
+  inset: 0;
+  background: #dfe6e9;
+  z-index: 1;
+}
+
+/* No raster tiles: the vendored boundaries are the whole basemap, so the
+   backdrop reads as water and the filled regions read as land. */
+.app__map.map--vector-only { background: #cfdbe4; }
+
+.app__districts {
+  border-top: 1px solid var(--line);
+  background: var(--paper);
+}
+
+/* ── Detail panel ───────────────────────────────────────────────────────────*/
+.app__panel {
+  grid-column: 2;
+  grid-row: 2;
+  background: var(--paper);
+  border-left: 1px solid var(--line);
+  overflow-y: auto;
+  min-height: 0;
+}
+
+/* ── Boot overlay ───────────────────────────────────────────────────────────*/
+.boot {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  background: var(--paper);
+  padding: var(--sp-5);
+}
+
+.boot[hidden] { display: none; }
+
+.boot__card {
+  max-width: 460px;
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-6);
+  box-shadow: var(--shadow-md);
+}
+
+.boot__title { font-size: var(--fs-lg); margin-bottom: var(--sp-2); }
+.boot__msg { color: var(--muted); margin-bottom: var(--sp-3); }
+
+.boot__detail {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  text-align: left;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--sp-2);
+  margin-bottom: var(--sp-3);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.boot__hint {
+  font-size: var(--fs-sm);
+  color: var(--muted);
+  margin-bottom: var(--sp-4);
+  line-height: 1.7;
+}
+
+/* ── Responsive: stack the panel under the map ──────────────────────────────*/
+@media (max-width: 900px) {
+  .app {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto minmax(320px, 45vh) auto;
+    height: auto;
+    min-height: 100dvh;
+  }
+
+  .app__main { grid-column: 1; grid-row: 2; }
+  .app__map-wrap { min-height: 300px; }
+
+  .app__panel {
+    grid-column: 1;
+    grid-row: 3;
+    border-left: none;
+    border-top: 1px solid var(--line);
+    overflow-y: visible;
+  }
+
+  .app__header { flex-wrap: wrap; gap: var(--sp-2); }
+  .app__badge { margin-left: 0; }
+}

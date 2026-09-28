@@ -1,0 +1,24 @@
+# Normalise line endings: LF in the repository, native in the working tree.
+* text=auto
+
+# Always LF — these are read by tools that dislike CRLF
+*.sh        text eol=lf
+*.py        text eol=lf
+Dockerfile  text eol=lf
+*.yml       text eol=lf
+*.yaml      text eol=lf
+
+# Binary — never diff, never convert
+*.png       binary
+*.pdf       binary
+*.joblib    binary
+*.xls       binary
+*.xlsx      binary
+*.gz        binary
+*.db        binary
+
+# Notebooks are JSON: keep them as text but suppress noisy diffs in reviews
+*.ipynb     text eol=lf linguist-documentation
+
+# Vendored third-party assets should not count towards language statistics
+6_APP/frontend/vendor/**  linguist-vendored

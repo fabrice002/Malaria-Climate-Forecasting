@@ -1,0 +1,48 @@
+# Full stack: PostGIS + prediction API + dashboard.
+#
+#   docker compose up --build
+#   dashboard  ->  http://localhost:8080
+#   API docs   ->  http://localhost:8000/docs
+#
+# The dashboard's nginx proxies /api to the api service, so the browser only ever
+# talks to one origin and no CORS configuration is needed.
+
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    environment:
+      POSTGRES_USER: malaria
+      POSTGRES_PASSWORD: malaria
+      POSTGRES_DB: malaria
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U malaria"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      # Context is this directory so the image gets both app/ and
+      # deployment_bundle/, which sit side by side here.
+      context: .
+      dockerfile: app/Dockerfile
+    environment:
+      MEWS_DATABASE_URL: postgresql+psycopg://malaria:malaria@db:5432/malaria
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+
+  dashboard:
+    build:
+      context: ./frontend
+    depends_on:
+      - api
+    ports:
+      - "8080:80"
+
+volumes:
+  pgdata:
