@@ -27,15 +27,15 @@ that serve them, and five follow-up studies that test where the model breaks.
 |---|---|
 | **Read the research in full** | [`docs/memoirthesis.pdf`](docs/memoirthesis.pdf) |
 | **Get the results in 5 minutes** | [§ The research in one page](#the-research-in-one-page) below |
-| **Regenerate every thesis figure** | [`3_REGENERATE_FIGURES/`](3_REGENERATE_FIGURES/) — open the notebook, Run All |
-| **Run the API + dashboard** | [`6_APP/`](6_APP/) — `python serve_all.py` |
-| **Read the methodology notebook** | [`4_SOURCE_NOTEBOOKS/1_malaria_full_protocol.ipynb`](4_SOURCE_NOTEBOOKS/1_malaria_full_protocol.ipynb) |
-| **See how far the model actually transfers** | [`9_NATIONAL_VALIDATION/`](9_NATIONAL_VALIDATION/) and [`8_FOUMBAN_EXPERIMENTS/`](8_FOUMBAN_EXPERIMENTS/) |
-| **Set up the IoT network and MQTT feed** | [`13_IOT_ACQUISITION/SETUP_GUIDE.md`](13_IOT_ACQUISITION/SETUP_GUIDE.md) |
-| **Understand the software architecture** | [§ Architecture](#architecture) below, then [`6_APP/app/README.md`](6_APP/app/README.md) |
-| **Understand the MLOps platform** | [`6_APP/app/mlops/README.md`](6_APP/app/mlops/README.md) |
+| **Regenerate every thesis figure** | [`figure_regeneration/`](figure_regeneration/) — open the notebook, Run All |
+| **Run the API + dashboard** | [`webapp/`](webapp/) — `python serve_all.py` |
+| **Read the methodology notebook** | [`notebooks/1_malaria_full_protocol.ipynb`](notebooks/1_malaria_full_protocol.ipynb) |
+| **See how far the model actually transfers** | [`national_validation/`](national_validation/) and [`foumban_experiments/`](foumban_experiments/) |
+| **Set up the IoT network and MQTT feed** | [`iot_acquisition/SETUP_GUIDE.md`](iot_acquisition/SETUP_GUIDE.md) |
+| **Understand the software architecture** | [§ Architecture](#architecture) below, then [`webapp/app/README.md`](webapp/app/README.md) |
+| **Understand the MLOps platform** | [`webapp/app/mlops/README.md`](webapp/app/mlops/README.md) |
 
-Every numbered folder has its own `README.md` explaining what is in it, how it was
+Every top-level folder has its own `README.md` explaining what is in it, how it was
 produced and what it concluded. Those are the primary documentation.
 
 ---
@@ -52,43 +52,43 @@ produced and what it concluded. Those are the primary documentation.
 ├── docs/
 │   └── memoirthesis.pdf              the thesis
 │
-├── 1_DATA/                       6 input files (the only data you need)
+├── data/                             6 input files (the only data you need)
 │
-├── 2_FIGURES/
+├── figures/
 │   ├── thesis_figures/               the 19 figures used in the thesis
-│   └── regenerated/                  output of 3_REGENERATE_FIGURES (starts empty)
+│   └── regenerated/                  output of figure_regeneration (starts empty)
 │
-├── 3_REGENERATE_FIGURES/
+├── figure_regeneration/
 │   └── generate_all_figures.ipynb    ★ one notebook → all 19 figures, ~11 min
 │
-├── 4_SOURCE_NOTEBOOKS/           9 original notebooks, numbered in workflow order
+├── notebooks/                        9 original notebooks, numbered in workflow order
 │
-├── 5_MODELS/
+├── models/
 │   ├── protocol/                     the thesis models (Optuna-tuned)
 │   └── deployment_bundle/            the 4 operational models
 │
-├── 6_APP/                        API + dashboard, runs out of the box
+├── webapp/                           API + dashboard, runs out of the box
 │   ├── app/                          FastAPI backend
 │   ├── frontend/                     operator dashboard (map, forecast, SHAP)
 │   └── deployment_bundle/            the 4 operational models
 │
-├── 8_FOUMBAN_EXPERIMENTS/        forecasting-strategy study on the external test
+├── foumban_experiments/              forecasting-strategy study on the external test
 │   └── foumban_forecasting_experiments.ipynb
 │
-├── 9_NATIONAL_VALIDATION/        external test across 194 districts, all 10 regions
+├── national_validation/              external test across 194 districts, all 10 regions
 │   ├── fetch_climate_2023_2025.py
 │   └── national_spatial_validation.ipynb
 │
-├── 10_REGIONAL_MODELS/           global vs regional vs grouped models
+├── regional_models/                  global vs regional vs grouped models
 │   └── global_vs_regional_models.ipynb
 │
-├── 11_FOUMBAN_INCREMENTAL/       6-monthly incremental learning study
+├── foumban_incremental/              6-monthly incremental learning study
 │   └── foumban_incremental_learning.ipynb
 │
-├── 12_SENSOR_VALIDATION/         deployed IoT hardware vs the training reanalysis
+├── sensor_validation/                deployed IoT hardware vs the training reanalysis
 │   └── sensor_vs_reanalysis.ipynb
 │
-└── 13_IOT_ACQUISITION/           the IoT acquisition layer: node → MQTT → CSV
+└── iot_acquisition/                  the IoT acquisition layer: node → MQTT → CSV
     ├── SETUP_GUIDE.md                reproducible procedure, commands, troubleshooting
     ├── HARDWARE_AND_NETWORK.md       boards, sensors, radio parameters, firmware
     ├── RECONCILIATION.md             inconsistencies across the three sources
@@ -128,7 +128,7 @@ stricter validation regimes.
 | ENG · Leave-One-Region-Out | 0.372 | −0.461 | deployment in an unseen region |
 | **External: Foumban 2023–25** | **0.250** | **−1.74** | **real unseen years — it fails** |
 
-**National external test** (added 1 Aug 2026, see [`9_NATIONAL_VALIDATION/`](9_NATIONAL_VALIDATION/)):
+**National external test** (added 1 Aug 2026, see [`national_validation/`](national_validation/)):
 across **194 districts × 2 years** the model ranks district burden with **Spearman
 ρ = 0.859** and correctly identifies **68 %** of the worst-quartile districts
 (25 % by chance). Absolute prediction fails; relative *ranking* transfers well.
@@ -144,12 +144,12 @@ defensible finding in the thesis.
 
 | Study | Question | Answer |
 |---|---|---|
-| [`8_FOUMBAN_EXPERIMENTS/`](8_FOUMBAN_EXPERIMENTS/) | which forecasting strategy on a real unseen district? | teacher forcing, MAE 261 vs 664 recursive (−61 %) |
-| [`9_NATIONAL_VALIDATION/`](9_NATIONAL_VALIDATION/) | does it transfer nationwide? | ranking does (ρ = 0.859), absolute values do not |
-| [`10_REGIONAL_MODELS/`](10_REGIONAL_MODELS/) | one global model or one per region? | indistinguishable (0.0123 of R²) — **keep the global model** |
-| [`11_FOUMBAN_INCREMENTAL/`](11_FOUMBAN_INCREMENTAL/) | retrain, recalibrate, or leave alone? | **never leave alone** — frozen MAE 434 vs 218 fine-tuned, and it degrades over time |
-| [`12_SENSOR_VALIDATION/`](12_SENSOR_VALIDATION/) | does the deployed sensor agree with the training data? | **no** — a +7.3 °C siting offset costs 38 % of the forecast; corrected, 1.3 % |
-| [`13_IOT_ACQUISITION/`](13_IOT_ACQUISITION/) | how does live environmental data actually reach the system? | LoRa mesh → gateway → Mosquitto → Python → CSV. The **adapter into the model schema is specified but not built** |
+| [`foumban_experiments/`](foumban_experiments/) | which forecasting strategy on a real unseen district? | teacher forcing, MAE 261 vs 664 recursive (−61 %) |
+| [`national_validation/`](national_validation/) | does it transfer nationwide? | ranking does (ρ = 0.859), absolute values do not |
+| [`regional_models/`](regional_models/) | one global model or one per region? | indistinguishable (0.0123 of R²) — **keep the global model** |
+| [`foumban_incremental/`](foumban_incremental/) | retrain, recalibrate, or leave alone? | **never leave alone** — frozen MAE 434 vs 218 fine-tuned, and it degrades over time |
+| [`sensor_validation/`](sensor_validation/) | does the deployed sensor agree with the training data? | **no** — a +7.3 °C siting offset costs 38 % of the forecast; corrected, 1.3 % |
+| [`iot_acquisition/`](iot_acquisition/) | how does live environmental data actually reach the system? | LoRa mesh → gateway → Mosquitto → Python → CSV. The **adapter into the model schema is specified but not built** |
 
 ---
 
@@ -160,21 +160,21 @@ Research produces it; the operational system consumes it.
 
 Upstream of both sits a third piece, built by a different project: the **IoT
 acquisition layer** — a LoRa/Meshtastic sensor mesh feeding an MQTT broker,
-documented in [`13_IOT_ACQUISITION/`](13_IOT_ACQUISITION/).
+documented in [`iot_acquisition/`](iot_acquisition/).
 
 > **Provenance.** The models below were trained and validated **exclusively** on
 > historical PNLP cases and ERA5 reanalysis (197 districts × 36 months,
 > 2019–2022). No IoT measurement was used for training, tuning, or any validation
 > regime. The IoT network is the *operational acquisition layer* for live
 > measurement and future inference. Its one appearance in the research —
-> [`12_SENSOR_VALIDATION/`](12_SENSOR_VALIDATION/) — asks whether the deployed
+> [`sensor_validation/`](sensor_validation/) — asks whether the deployed
 > instrument agrees with the training reanalysis, which is a hardware question,
 > not a modelling one.
 
 ```
    RESEARCH  (notebooks, run once, reproducible)
    ────────────────────────────────────────────────────────────────────────
-                1_DATA/
+                data/
        PNLP cases (.csv/.xls)      ERA5 climate (daily, 197 districts)
                   │                            │
                   └──────────┬─────────────────┘
@@ -192,13 +192,13 @@ documented in [`13_IOT_ACQUISITION/`](13_IOT_ACQUISITION/).
    Optuna-tuned                             Leave-One-Region-Out · external
         └────────────────────┬─────────────────────┘
                              ▼
-                    ★  5_MODELS/deployment_bundle/  ★
+                    ★  models/deployment_bundle/  ★
                        regressor / classifier  x  NO-LAG / LAG
                        + district_static.csv + artifacts.json
                              │
    ══════════════════════════│══════════════════════════════════════════════
                              │
-   OPERATIONS  (6_APP/, runs continuously)
+   OPERATIONS  (webapp/, runs continuously)
    ────────────────────────────────────────────────────────────────────────
                              ▼
         ┌────────────────────────────────────────────────────────┐
@@ -244,9 +244,9 @@ Both paths share **one** feature implementation
 between training and serving — *training/serving skew* — is the costliest and
 most silent failure mode an ML system has.
 
-Details: [`6_APP/app/README.md`](6_APP/app/README.md) for the backend,
-[`6_APP/app/mlops/README.md`](6_APP/app/mlops/README.md) for the platform,
-[`6_APP/frontend/README.md`](6_APP/frontend/README.md) for the dashboard.
+Details: [`webapp/app/README.md`](webapp/app/README.md) for the backend,
+[`webapp/app/mlops/README.md`](webapp/app/mlops/README.md) for the platform,
+[`webapp/frontend/README.md`](webapp/frontend/README.md) for the dashboard.
 
 ---
 
@@ -266,18 +266,18 @@ lightgbm 4.6.0 · catboost 1.2.10 · optuna 4.8.0 · shap 0.46.0 · matplotlib 3
 ### 2 · Regenerate every thesis figure
 
 ```bash
-cd 3_REGENERATE_FIGURES
+cd figure_regeneration
 jupyter lab generate_all_figures.ipynb      # then Run All
 ```
 
 Runs top to bottom with no manual intervention, ~11 minutes. All 19 figures land
-in `2_FIGURES/regenerated/`. The originals in `2_FIGURES/thesis_figures/` are
+in `figures/regenerated/`. The originals in `figures/thesis_figures/` are
 never touched, so you can compare side by side.
 
 ### 3 · Run the API and dashboard
 
 ```bash
-cd 6_APP && pip install -r app/requirements.txt
+cd webapp && pip install -r app/requirements.txt
 python serve_all.py
 # everything on http://localhost:8000/  · API docs at /docs
 ```
@@ -289,18 +289,18 @@ One command, one origin, no build step and no database setup (SQLite). Opening
 Containerised instead:
 
 ```bash
-cd 6_APP && docker compose up --build     # dashboard :8080 · API :8000
+cd webapp && docker compose up --build     # dashboard :8080 · API :8000
 ```
 
 Post a month of climate readings to `/api/v1/predict` and it returns predicted
 cases, incidence, the Low/High risk class and a SHAP explanation. The dashboard
 does this across districts and draws the result on a map of all 197 — see
-[`6_APP/frontend/README.md`](6_APP/frontend/README.md).
+[`webapp/frontend/README.md`](webapp/frontend/README.md).
 
 ### 4 · Check the MLOps platform end to end
 
 ```bash
-cd 6_APP && python test_mlops.py     # offline, ~30 s
+cd webapp && python test_mlops.py     # offline, ~30 s
 ```
 
 Exercises the source registry, collection, validation (including a negative test
@@ -315,12 +315,12 @@ all six `/mlops/*` endpoints.
    and what it means
 2. [`docs/memoirthesis.pdf`](docs/memoirthesis.pdf) — the full argument, with the
    literature review and the methodology written out
-3. [`2_FIGURES/thesis_figures/`](2_FIGURES/thesis_figures/) — the 19 figures, with
-   [`2_FIGURES/README.md`](2_FIGURES/README.md) explaining what each one shows
-4. [`3_REGENERATE_FIGURES/generate_all_figures.ipynb`](3_REGENERATE_FIGURES/generate_all_figures.ipynb)
+3. [`figures/thesis_figures/`](figures/thesis_figures/) — the 19 figures, with
+   [`figures/README.md`](figures/README.md) explaining what each one shows
+4. [`figure_regeneration/generate_all_figures.ipynb`](figure_regeneration/generate_all_figures.ipynb)
    — run it; it is also the most readable single implementation of the whole
    pipeline
-5. [`4_SOURCE_NOTEBOOKS/1_malaria_full_protocol.ipynb`](4_SOURCE_NOTEBOOKS/1_malaria_full_protocol.ipynb)
+5. [`notebooks/1_malaria_full_protocol.ipynb`](notebooks/1_malaria_full_protocol.ipynb)
    — the methodology in full
 6. The five follow-up studies in folders `8`–`12`, each with its own README
 
@@ -333,19 +333,19 @@ The three that matter:
 
 1. **The 2026 forecast notebook shows a "regressor↔classifier contradiction"** that
    is *not real* — it came from a stale model artifact. Re-scored against the models
-   in [`5_MODELS/`](5_MODELS/), the regressor gives 14.60/1000 (May) and 12.86/1000
+   in [`models/`](models/), the regressor gives 14.60/1000 (May) and 12.86/1000
    (June), consistent with the classifier and with the observed 14.04/1000. Re-run
-   [`4_SOURCE_NOTEBOOKS/9_predictions_yaounde_mai_juin_2026.ipynb`](4_SOURCE_NOTEBOOKS/9_predictions_yaounde_mai_juin_2026.ipynb)
+   [`notebooks/9_predictions_yaounde_mai_juin_2026.ipynb`](notebooks/9_predictions_yaounde_mai_juin_2026.ipynb)
    and drop that discussion.
 2. **The naive-baseline section (Phase 3.5)** exists only in
-   [`4_SOURCE_NOTEBOOKS/2_malaria_full_protocol_PLUS_naive_baselines.ipynb`](4_SOURCE_NOTEBOOKS/2_malaria_full_protocol_PLUS_naive_baselines.ipynb),
+   [`notebooks/2_malaria_full_protocol_PLUS_naive_baselines.ipynb`](notebooks/2_malaria_full_protocol_PLUS_naive_baselines.ipynb),
    not in the source of truth. It answers the most predictable examiner question
    and should be merged in.
 3. **`8_evaluation_foumban_2023_2025.ipynb`** reports two contradictory results.
    Its written diagnostic (+28 % bias) is correct; its stored output (R² −68.65,
    −85 % bias) came from a corrupted model load. The real baseline is **R² −1.74
    with a +28 % over-prediction**. Evidence and a full re-derivation in
-   [`8_FOUMBAN_EXPERIMENTS/`](8_FOUMBAN_EXPERIMENTS/). One cell also errors out.
+   [`foumban_experiments/`](foumban_experiments/). One cell also errors out.
 
 ---
 
@@ -356,13 +356,13 @@ The three that matter:
 | Confirmed malaria cases, 197 districts, 2019–2025 | PNLP (Programme National de Lutte contre le Paludisme), Cameroon | Redistributed here as district-month aggregates; no individual-level records |
 | Daily climate reanalysis, 2019–2026 | ERA5 / Open-Meteo, NASA POWER | Open data under their respective terms |
 | Administrative boundaries (`cameroon_adm0/adm1.json`) | public administrative boundary datasets | as published by the source |
-| Leaflet (`6_APP/frontend/vendor/leaflet/`) | Leaflet project | BSD-2-Clause, vendored unmodified |
+| Leaflet (`webapp/frontend/vendor/leaflet/`) | Leaflet project | BSD-2-Clause, vendored unmodified |
 
 The **code** in this repository is MIT-licensed ([`LICENSE`](LICENSE)). The
-**data files** in [`1_DATA/`](1_DATA/) and
-[`9_NATIONAL_VALIDATION/`](9_NATIONAL_VALIDATION/) remain subject to the terms of
+**data files** in [`data/`](data/) and
+[`national_validation/`](national_validation/) remain subject to the terms of
 the organisations that produced them; cite those sources, not this repository,
-when you reuse them. [`1_DATA/README.md`](1_DATA/README.md) documents each file.
+when you reuse them. [`data/README.md`](data/README.md) documents each file.
 
 > **Not a medical device.** These models are a research artefact. They were built
 > and validated on historical aggregates, they fail on unseen regions and they
@@ -378,7 +378,7 @@ when you reuse them. [`1_DATA/README.md`](1_DATA/README.md) documents each file.
   and the thesis LaTeX sources. The thesis PDF in [`docs/`](docs/) supersedes all
   of them for a reader.
 - **~31 exploratory notebooks.** The original project holds around 40 notebooks
-  accumulated over four months. The 9 in [`4_SOURCE_NOTEBOOKS/`](4_SOURCE_NOTEBOOKS/)
+  accumulated over four months. The 9 in [`notebooks/`](notebooks/)
   are the ones that produce thesis results; the rest are earlier iterations,
   duplicates and dead ends.
 - **Intermediate CSVs** that are rebuilt from the raw data, ~100 superseded

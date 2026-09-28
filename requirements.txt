@@ -4,7 +4,7 @@
 #
 #   pip install -r requirements.txt
 #
-# The API in 6_APP/ has its own, lighter list: 6_APP/app/requirements.txt
+# The API in webapp/ has its own, lighter list: webapp/app/requirements.txt
 
 # ── core ─────────────────────────────────────────────────────────────────────
 numpy==1.26.4

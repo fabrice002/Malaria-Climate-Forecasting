@@ -21,4 +21,4 @@ Dockerfile  text eol=lf
 *.ipynb     text eol=lf linguist-documentation
 
 # Vendored third-party assets should not count towards language statistics
-6_APP/frontend/vendor/**  linguist-vendored
+webapp/frontend/vendor/**  linguist-vendored

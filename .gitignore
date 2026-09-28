@@ -3,16 +3,16 @@
 # ──────────────────────────────────────────────────────────────────────────────
 # Internal working documents and the thesis LaTeX sources are kept private.
 # The thesis itself is published as docs/memoirthesis.pdf.
-0_DOCUMENTATION/
-7_THESIS_TEXT/
+internal_docs/
+thesis_text/
 
 # ──────────────────────────────────────────────────────────────────────────────
 # Generated output — rebuilt by the notebooks, never committed
 # ──────────────────────────────────────────────────────────────────────────────
-# 3_REGENERATE_FIGURES/generate_all_figures.ipynb writes here (Run All, ~11 min).
-# The originals in 2_FIGURES/thesis_figures/ ARE committed, for comparison.
-2_FIGURES/regenerated/*
-!2_FIGURES/regenerated/.gitkeep
+# figure_regeneration/generate_all_figures.ipynb writes here (Run All, ~11 min).
+# The originals in figures/thesis_figures/ ARE committed, for comparison.
+figures/regenerated/*
+!figures/regenerated/.gitkeep
 
 # CatBoost training logs
 catboost_info/
@@ -20,7 +20,7 @@ catboost_info/
 # ──────────────────────────────────────────────────────────────────────────────
 # Application runtime state
 # ──────────────────────────────────────────────────────────────────────────────
-# SQLite database created on first run of 6_APP/serve_all.py
+# SQLite database created on first run of webapp/serve_all.py
 *.db
 *.db-journal
 *.sqlite
